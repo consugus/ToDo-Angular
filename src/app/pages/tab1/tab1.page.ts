@@ -30,14 +30,14 @@ export class Tab1Page {
       buttons: [{
         text: "Agregar",
         handler: (data) => {
-          // this.router.navigateByUrl("tabs/tab1/add");
           console.log("Crear");
-
+          let listId;
           if(data.titulo.length !== 0){
-            this.todoService.createList(data.titulo);
+            listId = this.todoService.createList(data.titulo);
           }
-          return;
-
+          // console.log(listId);
+          this.router.navigateByUrl( `/tabs/tab1/add/${ listId }`);
+          // return;
         }
       },
       {
