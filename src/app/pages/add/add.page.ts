@@ -26,7 +26,7 @@ export class AddPage implements OnInit {
   ngOnInit() {
   }
 
-  agregarTarea(){
+  addTask(){
     if( this.taskName.length === 0){
       return;
     }
@@ -58,6 +58,10 @@ export class AddPage implements OnInit {
   }
 
 
+  delete(idx: number){
+    this.list.item.splice( idx, 1 )
+    this.todoService.saveList();
+  }
 
 
 }

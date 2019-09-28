@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { List } from '../../models/list.model';
 
 @Component({
   selector: 'app-tab1',
@@ -30,25 +31,28 @@ export class Tab1Page {
       buttons: [{
         text: "Agregar",
         handler: (data) => {
-          console.log("Crear");
+          // console.log("Crear");
           let listId;
           if(data.titulo.length !== 0){
             listId = this.todoService.createList(data.titulo);
+            this.router.navigateByUrl( `/tabs/tab1/add/${ listId }`);
           }
-          // console.log(listId);
-          this.router.navigateByUrl( `/tabs/tab1/add/${ listId }`);
-          // return;
         }
       },
       {
         text: "Cancelar",
         role: "cancel",
         handler: () => {
-          console.log("Cancelar");
+          // console.log("Cancelar");
         }
       }]
     });
     await alert.present();
+  }
+
+  
+  selectedList( list:List ){
+    this.router.navigateByUrl( `/tabs/tab1/add/${ list.id }`);
   }
 
 }
