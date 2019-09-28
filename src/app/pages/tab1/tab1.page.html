@@ -7,22 +7,13 @@
 </ion-header>
 
 
-<app-lists></app-lists>
 
 
 <ion-content color="dark">
 
-  <div class="saludo">
 
-    <!-- List of Text Items -->
-    <ion-list color="dark">
-      <ion-item *ngFor="let list of todoService.lists" detail color="dark" (click)="selectedList( list )">
-        <ion-label>{{ list.title | titlecase }}</ion-label>
-        <ion-note slot="end" color="tertiary">({{ list.item.length }} items)</ion-note>
-      </ion-item>
-    </ion-list>
+  <app-lists [terminados]="false"></app-lists>
 
-  </div><!-- end .saludo -->
 
   <!-- fab placed to the top end -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
