@@ -19,9 +19,12 @@ export class ListsComponent implements OnInit {
   ngOnInit() {}
 
   selectedList( list:List ){
-
     let tab:string = ( this.terminados ? "tab2" : "tab1" )
     this.router.navigateByUrl( `/tabs/${tab}/add/${ list.id }`);
+  }
+
+  deleteList( list: List ){
+    this.todoService.deleteList(list);
   }
 
 }

@@ -11,7 +11,6 @@ export class TodoService {
 
   constructor(  ) {
     this.getList();
-    // console.log(this.lists);
   }
 
   createList(title: string){
@@ -19,6 +18,15 @@ export class TodoService {
     this.lists.push(newList);
     this.saveList();
     return newList.id;
+  }
+
+  deleteList( list:List){
+    for(let i = 0 ; i < this.lists.length ; i++){
+      if(this.lists[i].id === list.id){
+        this.lists.splice(i, 1);
+      }
+    }
+    this.saveList();
   }
 
   saveList(){
