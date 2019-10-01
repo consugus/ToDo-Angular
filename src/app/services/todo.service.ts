@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
+import { AlertController, IonList } from '@ionic/angular'
 import { List } from '../models/list.model';
 
 @Injectable({
@@ -9,7 +10,7 @@ export class TodoService {
   lists:List[];
   lastName:string;
 
-  constructor(  ) {
+  constructor( private alertCtrl:AlertController ) {
     this.getList();
   }
 
@@ -45,6 +46,38 @@ export class TodoService {
         return this.lists[i];
       }
     }
+  }
+
+  async editList(list:List){
+    console.log(`Hay que editar la lista ${list.title}, desde los servicios`);
+
+    const alert =  await this.alertCtrl.create({
+      header: 'Editar Lista',
+      inputs: [{
+        name: "titulo",
+        type: "text",
+        value: list.title,
+        placeholder: "Nombre de la lista"
+      }],
+      buttons: [{
+        text: "Guardar",
+        handler: (data) => {
+          if(data.titulo){
+            list.title = data.titulo;
+            this.saveList();
+          }
+        }
+      },
+      {
+        text: "Cancelar",
+        role: "cancel",
+        handler: () => {
+          // console.log("Cancelar");
+        }
+      }]
+    });
+    await alert.present();
+
   }
 
 }

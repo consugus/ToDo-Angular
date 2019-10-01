@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { List } from 'src/app/models/list.model';
 import { Router } from '@angular/router';
+import { IonList } from '@ionic/angular';
 
 @Component({
   selector: 'app-lists',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 export class ListsComponent implements OnInit {
 
   @Input() terminados = true;
+  @ViewChild( IonList, {static: true} ) list: IonList;
 
   constructor( public todoService: TodoService,
                private router:Router
@@ -25,6 +27,11 @@ export class ListsComponent implements OnInit {
 
   deleteList( list: List ){
     this.todoService.deleteList(list);
+  }
+
+  editList(list:List){
+    this.todoService.editList(list).then
+    this.list.closeSlidingItems();
   }
 
 }
